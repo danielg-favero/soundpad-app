@@ -1,0 +1,18 @@
+import { IAudio } from "./audios.d";
+
+export const audios: IAudio[] = [
+    {
+        id: '1',
+        duration: 100,
+        imageUrl: '../../assets/favicon.png',
+        name: 'Mr Krabs',
+        audioFile: require('../../assets/audios/mr_krabs.mp3')
+    },
+    {
+        id: '2',
+        duration: 100,
+        imageUrl: '../../assets/favicon.png',
+        name: 'Boomerang',
+        audioFile: require('../../assets/audios/boomerang.mp3')
+    }
+]
