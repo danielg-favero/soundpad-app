@@ -1,2 +1,2 @@
 export { audios } from './audios';
-export { IAudio } from './audios.d';
+export { IAudio } from '../@types/audios.d';
