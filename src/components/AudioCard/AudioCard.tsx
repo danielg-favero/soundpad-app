@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Audio, AVPlaybackSource, AVPlaybackStatus, AVPlaybackStatusSuccess } from 'expo-av';
+import { Audio } from 'expo-av';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import { IAudio } from '../../data';
@@ -13,8 +13,7 @@ interface AudioCardProps {
 export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
     const [audioIsPlaying, setAudioIsPlaying] = useState<boolean>(false);
     const [currentAudio] = useState<Audio.Sound>(new Audio.Sound());
-    const [audioDuration, setAudioDuration] = useState();
-    
+
     useEffect(() => {
         (async () => {
             if(audioIsPlaying){
@@ -46,13 +45,6 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
                     <Text style={styles.audioName}>{audio.name}</Text>
                 </View>
             </TouchableOpacity>
-            <View 
-                style={[
-                    styles.audioProgressDuration,
-                    {
-                    }
-                ]}
-            />
         </>
     )
 }

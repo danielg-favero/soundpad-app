@@ -11,5 +11,13 @@ export const styles = StyleSheet.create({
     },
     audioList: {
       width: '100%'
+    },
+    searchInput: {
+      width: '100%',
+      borderWidth: 1,
+      borderColor: '#d1d1d1',
+      borderRadius: 4,
+      padding: 16,
+      fontFamily: 'Poppins_300Light'
     }
 });

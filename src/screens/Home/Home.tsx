@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, StatusBar, TextInput, View } from 'react-native';
 import { usePrismicDocuments } from '@prismicio/react';
+import { PrismicDocument } from '@prismicio/types';
 
 import { AudioCard } from '../../components/AudioCard';
 import { IAudio } from '../../data';
 
 import { styles } from './Home.styles';
-import { PrismicDocument } from '@prismicio/types';
 
 function parseAudios(documents: PrismicDocument[]): IAudio[] {
   const parsedAudios: IAudio[] = documents.map(document => {
@@ -25,16 +25,32 @@ export const Home: React.FC = () => {
   const [audios, setAudios] = useState<IAudio[]>();
   const [documents] = usePrismicDocuments();
 
+  const handleSearch = useCallback((searchText: string) => {
+    if(audios){
+      if(searchText !== ''){
+        const filteredAudios = audios.filter(audio => audio.name.toUpperCase() === searchText.toUpperCase());
+  
+        if(filteredAudios.length > 0){
+          setAudios(filteredAudios);
+        }
+      }
+    }    
+  }, [audios])
+
   useEffect(() => {
     if(documents){
       const parsedAudios = parseAudios(documents.results);
-      console.log(parsedAudios)
       setAudios(parsedAudios);
     }
   }, [documents])
 
   return (
     <View style={styles.container}>
+      <TextInput 
+        placeholder='Pesquisar'
+        onChangeText={handleSearch}
+        style={styles.searchInput}
+      />
       {
         documents && (
           <FlatList 
