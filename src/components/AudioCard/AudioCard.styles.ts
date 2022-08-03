@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         borderRadius: 4,
         width: '100%',
         paddingHorizontal: 32,
-        paddingVertical: 16,
+        paddingVertical: 32,
         marginTop: 8
     },
     playIcon: {
@@ -18,9 +18,6 @@ export const styles = StyleSheet.create({
     audioName: {
         fontFamily: 'Poppins_700Bold',
         textTransform: 'uppercase'
-    },
-    audioDuration: {
-        fontFamily: 'Poppins_300Light'
     },
     audioProgressDuration: {
         height: 5,

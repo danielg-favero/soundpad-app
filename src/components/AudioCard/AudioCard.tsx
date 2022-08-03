@@ -44,7 +44,6 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
                 />
                 <View>
                     <Text style={styles.audioName}>{audio.name}</Text>
-                    <Text style={styles.audioDuration}></Text>
                 </View>
             </TouchableOpacity>
             <View 
