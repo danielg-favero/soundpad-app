@@ -18,7 +18,7 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
     useEffect(() => {
         (async () => {
             if(audioIsPlaying){
-                await currentAudio.loadAsync(audio.audioFile, {}, true);
+                await currentAudio.loadAsync({ uri: audio.audioFile });
                 const { isLoaded } = await currentAudio.getStatusAsync();
                 
                 if(isLoaded){
@@ -44,7 +44,7 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
                 />
                 <View>
                     <Text style={styles.audioName}>{audio.name}</Text>
-                    <Text style={styles.audioDuration}>{audio.duration}</Text>
+                    <Text style={styles.audioDuration}></Text>
                 </View>
             </TouchableOpacity>
             <View 
