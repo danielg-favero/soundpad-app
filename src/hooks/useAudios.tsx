@@ -11,6 +11,7 @@ export const useAudios = () => {
             .getItem('audios')
             .then(res => JSON.parse(res));
 
+        setAudios(savedAudios);
         return savedAudios;
     }
 
@@ -41,9 +42,22 @@ export const useAudios = () => {
         }
     }
 
+    async function deleteAudio(audioId: string){
+        const savedAudios = await getSavedAudios();
+        const newAudios = savedAudios.filter(audio => audio.id !== audioId);
+
+        AsyncStorage
+                .setItem('audios', JSON.stringify(newAudios))
+                .then(() => console.log('Áudio deleteado com sucesso!'))
+                .catch(error => console.log(`Não foi possível deletar o áudio: ${error}`))
+
+        setAudios(newAudios);
+    }
+
     return {
         audios,
         getSavedAudios,
-        saveAudio
+        saveAudio,
+        deleteAudio
     }
 }

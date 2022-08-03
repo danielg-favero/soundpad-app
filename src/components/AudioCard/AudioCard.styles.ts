@@ -8,14 +8,22 @@ export const styles = StyleSheet.create({
         backgroundColor: '#F8F8F8',
         borderRadius: 4,
         width: '100%',
-        padding: 8,
+        paddingHorizontal: 32,
+        paddingVertical: 16,
         marginTop: 8
     },
-    cardInfo: {
-        
+    playIcon: {
+        marginRight: 32,
     },
-    audioImage: {
-        width: 50,
-        height: 50
+    audioName: {
+        fontFamily: 'Poppins_700Bold',
+        textTransform: 'uppercase'
+    },
+    audioDuration: {
+        fontFamily: 'Poppins_300Light'
+    },
+    audioProgressDuration: {
+        height: 5,
+        backgroundColor: '#ceacfc',
     }
 });

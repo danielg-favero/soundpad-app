@@ -1,6 +1,7 @@
-import React from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { Audio, AVPlaybackSource } from 'expo-av';
+import React, { useEffect, useRef, useState } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Audio, AVPlaybackSource, AVPlaybackStatus, AVPlaybackStatusSuccess } from 'expo-av';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import { IAudio } from '../../data';
 import { styles } from './AudioCard.styles';
@@ -10,30 +11,49 @@ interface AudioCardProps {
 }
 
 export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
-    async function playAudio(audioFile: AVPlaybackSource){
-        const { sound } = await Audio.Sound.createAsync(audioFile);
-        const soundStatus = await sound.getStatusAsync();
-            
-        if(soundStatus.isLoaded){
-            if(soundStatus.isPlaying === false){
-                await sound.playAsync();
+    const [audioIsPlaying, setAudioIsPlaying] = useState<boolean>(false);
+    const [currentAudio] = useState<Audio.Sound>(new Audio.Sound());
+    const [audioDuration, setAudioDuration] = useState();
+    
+    useEffect(() => {
+        (async () => {
+            if(audioIsPlaying){
+                await currentAudio.loadAsync(audio.audioFile, {}, true);
+                const { isLoaded } = await currentAudio.getStatusAsync();
+                
+                if(isLoaded){
+                    await currentAudio.playAsync();
+                }
+            } else {
+                await currentAudio.unloadAsync();
+                await currentAudio.pauseAsync();
             }
-        }
-    }
+        })();
+    }, [audioIsPlaying])
 
     return (
-        <TouchableOpacity 
-            style={styles.cardContainer}
-            onPress={() => playAudio(audio.audioFile)}
-        >
-            <Image 
-                source={{ uri: audio.imageUrl }}
-                style={styles.audioImage}
+        <>
+            <TouchableOpacity 
+                style={styles.cardContainer}
+                onPress={() => setAudioIsPlaying(!audioIsPlaying)}
+            >
+                <FontAwesome 
+                    name={audioIsPlaying ? 'pause' : 'play'}
+                    size={24}
+                    style={styles.playIcon}
+                />
+                <View>
+                    <Text style={styles.audioName}>{audio.name}</Text>
+                    <Text style={styles.audioDuration}>{audio.duration}</Text>
+                </View>
+            </TouchableOpacity>
+            <View 
+                style={[
+                    styles.audioProgressDuration,
+                    {
+                    }
+                ]}
             />
-            <View style={styles.cardInfo}>
-                <Text>{audio.name}</Text>
-                <Text>{audio.duration}</Text>
-            </View>
-        </TouchableOpacity>
+        </>
     )
 }

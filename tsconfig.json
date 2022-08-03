@@ -3,7 +3,8 @@
     "typeRoots": [
       "node_modules/@types",
       "./@types"
-    ]
+    ],
+    "strictNullChecks": true
   },
   "extends": "expo/tsconfig.base",
 }
