@@ -26,7 +26,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.danielg.favero.soundpadapp"
+      "package": "com.danielg.favero.soundpadapp",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

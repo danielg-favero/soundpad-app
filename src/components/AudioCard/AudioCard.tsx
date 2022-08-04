@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Audio } from 'expo-av';
+import { Audio, AVPlaybackStatusSuccess } from 'expo-av';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import { IAudio } from '../../data';
@@ -18,7 +18,7 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
         (async () => {
             if(audioIsPlaying){
                 await currentAudio.loadAsync({ uri: audio.audioFile });
-                const { isLoaded } = await currentAudio.getStatusAsync();
+                const { isLoaded } = await currentAudio.getStatusAsync() as AVPlaybackStatusSuccess;
                 
                 if(isLoaded){
                     await currentAudio.playAsync();

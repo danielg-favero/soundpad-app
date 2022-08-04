@@ -32,9 +32,9 @@ export const Home: React.FC = () => {
   
         if(filteredAudios.length > 0){
           setAudios(filteredAudios);
-        }
+        } 
       }
-    }    
+    } 
   }, [audios])
 
   useEffect(() => {
