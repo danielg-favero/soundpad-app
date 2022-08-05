@@ -4,7 +4,7 @@ import { usePrismicDocuments } from '@prismicio/react';
 import { PrismicDocument } from '@prismicio/types';
 
 import { AudioCard } from '../../components/AudioCard';
-import { IAudio } from '../../data';
+import { IAudio } from '../../@types/audios.d';
 
 import { styles } from './Home.styles';
 
@@ -24,24 +24,8 @@ function parseAudios(documents: PrismicDocument[]): IAudio[] {
 
 export const Home: React.FC = () => {
   const [audios, setAudios] = useState<IAudio[]>();
+  const [search, setSearch] = useState<string>('');
   const [documents] = usePrismicDocuments();
-
-  const handleSearch = useCallback(
-    (searchText: string) => {
-      if (audios) {
-        if (searchText !== '') {
-          const filteredAudios = audios.filter(
-            (audio) => audio.name.toUpperCase() === searchText.toUpperCase(),
-          );
-
-          if (filteredAudios.length > 0) {
-            setAudios(filteredAudios);
-          }
-        }
-      }
-    },
-    [audios],
-  );
 
   useEffect(() => {
     if (documents) {
@@ -50,10 +34,24 @@ export const Home: React.FC = () => {
     }
   }, [documents]);
 
+  const filteredAudios =
+    search.length > 0 ? audios?.filter((audio) => audio.name.includes(search)) : [];
+
   return (
     <View style={styles.container}>
-      <TextInput placeholder="Pesquisar" onChangeText={handleSearch} style={styles.searchInput} />
-      {documents && (
+      <TextInput
+        placeholder="Pesquisar"
+        onChangeText={(e) => setSearch(e)}
+        style={styles.searchInput}
+      />
+      {audios && search.length > 0 ? (
+        <FlatList
+          data={filteredAudios}
+          keyExtractor={(filteredAudio) => filteredAudio.id}
+          renderItem={({ item }) => <AudioCard audio={item} />}
+          style={styles.audioList}
+        />
+      ) : (
         <FlatList
           data={audios}
           keyExtractor={(audio) => audio.id}
