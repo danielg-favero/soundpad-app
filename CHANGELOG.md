@@ -6,6 +6,7 @@ Todas as atualizações desse projeto serão registrados nesse arquivo
 ## [1.1.1] - 05/08/2022
 ### Fixed
 - Ajustado mecanismo de pesquisa
+- Botão de play volta ao estado de "pause" quando áudio termina de tocar
 
 ## [1.1.0] - 05/08/2022
 ### Added

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, StatusBar, TextInput, View } from 'react-native';
 import { usePrismicDocuments } from '@prismicio/react';
 import { PrismicDocument } from '@prismicio/types';

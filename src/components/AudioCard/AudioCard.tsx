@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Audio, AVPlaybackStatusSuccess } from 'expo-av';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-import { IAudio } from '../../data';
+import { IAudio } from '../../@types/audios.d';
 import { styles } from './AudioCard.styles';
 
 interface AudioCardProps {
@@ -18,10 +18,15 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
     (async () => {
       if (audioIsPlaying) {
         await currentAudio.loadAsync({ uri: audio.audioFile });
-        const { isLoaded } = (await currentAudio.getStatusAsync()) as AVPlaybackStatusSuccess;
+        const { isLoaded, durationMillis } =
+          (await currentAudio.getStatusAsync()) as AVPlaybackStatusSuccess;
 
         if (isLoaded) {
           await currentAudio.playAsync();
+
+          setTimeout(() => {
+            setAudioIsPlaying(false);
+          }, durationMillis);
         }
       } else {
         await currentAudio.unloadAsync();
