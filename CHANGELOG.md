@@ -1,7 +1,7 @@
 # Changelog
 Todas as atualizações desse projeto serão registrados nesse arquivo
 
-## [Unreleased]
+## [Released]
 
 ## [1.1.1] - 05/08/2022
 ### Fixed
@@ -11,8 +11,6 @@ Todas as atualizações desse projeto serão registrados nesse arquivo
 ## [1.1.0] - 05/08/2022
 ### Added
 - Eslint e prettier para formatação dos arquivos de código do projeto
-
-## [Released]
 
 ## [1.0.0] - 04/08/2022
 ### Added
