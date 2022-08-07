@@ -1,15 +1,13 @@
-import { useState } from 'react';
-import { AsyncStorage } from 'react-native';
+import { useState } from "react";
+import { AsyncStorage } from "react-native";
 
-import { IAudio } from '../@types/audios';
+import { IAudio } from "../@types/audios";
 
 export const useAudios = () => {
   const [audios, setAudios] = useState<IAudio[]>();
 
   async function getSavedAudios() {
-    const savedAudios: IAudio[] = await AsyncStorage.getItem('audios').then((res) =>
-      JSON.parse(res),
-    );
+    const savedAudios: IAudio[] = await AsyncStorage.getItem("audios").then(res => JSON.parse(res));
 
     setAudios(savedAudios);
     return savedAudios;
@@ -22,19 +20,19 @@ export const useAudios = () => {
     if (savedAudios) {
       // Adicionar novo arquivo ao array resgatado
       savedAudios.push(audioFile);
-      console.log('\nsaveAudio - Audios recuperados: ', savedAudios, '\n');
+      console.log("\nsaveAudio - Audios recuperados: ", savedAudios, "\n");
 
       // Salvar novo array com música nova adicionada
-      AsyncStorage.setItem('audios', JSON.stringify(savedAudios))
-        .then(() => console.log('Áudio salvo com sucesso!'))
-        .catch((error) => console.log(`Não foi possível salvar o áudio: ${error}`));
+      AsyncStorage.setItem("audios", JSON.stringify(savedAudios))
+        .then(() => console.log("Áudio salvo com sucesso!"))
+        .catch(error => console.log(`Não foi possível salvar o áudio: ${error}`));
 
       setAudios(savedAudios);
     } else {
-      console.log('\nsaveAudio - Salvar audio: ', audioFile, '\n');
-      AsyncStorage.setItem('audios', JSON.stringify([audioFile]))
-        .then(() => console.log('Áudio salvo com sucesso!'))
-        .catch((error) => console.log(`Não foi possível salvar o áudio: ${error}`));
+      console.log("\nsaveAudio - Salvar audio: ", audioFile, "\n");
+      AsyncStorage.setItem("audios", JSON.stringify([audioFile]))
+        .then(() => console.log("Áudio salvo com sucesso!"))
+        .catch(error => console.log(`Não foi possível salvar o áudio: ${error}`));
 
       setAudios([audioFile]);
     }
@@ -42,11 +40,11 @@ export const useAudios = () => {
 
   async function deleteAudio(audioId: string) {
     const savedAudios = await getSavedAudios();
-    const newAudios = savedAudios.filter((audio) => audio.id !== audioId);
+    const newAudios = savedAudios.filter(audio => audio.id !== audioId);
 
-    AsyncStorage.setItem('audios', JSON.stringify(newAudios))
-      .then(() => console.log('Áudio deleteado com sucesso!'))
-      .catch((error) => console.log(`Não foi possível deletar o áudio: ${error}`));
+    AsyncStorage.setItem("audios", JSON.stringify(newAudios))
+      .then(() => console.log("Áudio deleteado com sucesso!"))
+      .catch(error => console.log(`Não foi possível deletar o áudio: ${error}`));
 
     setAudios(newAudios);
   }

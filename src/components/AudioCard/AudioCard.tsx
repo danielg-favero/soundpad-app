@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Audio, AVPlaybackStatusSuccess } from 'expo-av';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { Audio, AVPlaybackStatusSuccess } from "expo-av";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-import { IAudio } from '../../@types/audios.d';
-import { styles } from './AudioCard.styles';
+import { IAudio } from "../../@types/audios.d";
+import { styles } from "./AudioCard.styles";
 
 interface AudioCardProps {
   audio: IAudio;
@@ -41,7 +41,7 @@ export const AudioCard: React.FC<AudioCardProps> = ({ audio }) => {
         style={styles.cardContainer}
         onPress={() => setAudioIsPlaying(!audioIsPlaying)}
       >
-        <FontAwesome name={audioIsPlaying ? 'pause' : 'play'} size={24} style={styles.playIcon} />
+        <FontAwesome name={audioIsPlaying ? "pause" : "play"} size={24} style={styles.playIcon} />
         <View>
           <Text style={styles.audioName}>{audio.name}</Text>
         </View>
